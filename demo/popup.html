@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link href="/lib/date-picker/assets/dpl.css" rel="stylesheet"/>
+    <script src="/mx_modules/modulex-debug.js"></script>
+    <script src="/mx_modules/ua-debug.js"></script>
+    <script src="/mx_modules/feature-debug.js"></script>
+    <script src="/mx_modules/meta.js"></script>
+    <script>
+        modulex.config({
+            base: '/mx_modules',
+            packages: {
+                'date-picker': {
+                    filter:'debug',
+                    base: '/build/date-picker'
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+<h1>popup-date-picker</h1>
+<div style="height: 100px"></div>
+<div class="container">
+    <input id="t"/>
+    <button id="popup">弹出</button>
+</div>
+
+<div style="height: 999px"></div>
+<script>
+    modulex.use('node,date-picker,gregorian-calendar-format', function (Node, DatePicker, DateFormat) {
+        var PopupDatePicker = DatePicker.Popup;
+        var $ = Node.all,
+                dateFormat = DateFormat.getDateInstance(DateFormat.Style.LONG),
+                picker,
+                t = $('#t');
+
+        $('#popup').on('click', showPicker);
+
+        function showPicker(e) {
+            e.preventDefault();
+            if (!picker) {
+                picker = createPicker();
+            }
+            if (t.val()) {
+                var val;
+                try {
+                    val = dateFormat.parse(t.val());
+                    picker.set('value', val);
+                } catch (ex) {
+                }
+            }
+            picker.set('align', {
+                node: t,
+                points: ['bl', 'tl']
+            });
+            picker.show();
+            picker.focus();
+        }
+
+        function createPicker() {
+            picker = new PopupDatePicker({
+                shim: true
+            });
+            picker.on('blur', function () {
+                picker.hide();
+            });
+            picker.on('select', function (e) {
+                if (e.value) {
+                    t.val(dateFormat.format(e.value));
+                } else {
+                    t.val('');
+                }
+                t[0].focus();
+            });
+            return picker;
+        }
+
+        t.on('keydown', function (e) {
+            if (e.keyCode == Node.KeyCode.DOWN) {
+                showPicker(e);
+            }
+        });
+    });
+</script>
+</body>
+</html>
