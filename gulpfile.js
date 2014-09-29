@@ -14,6 +14,7 @@ var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var jscs = require('gulp-jscs');
 var replace = require('gulp-replace');
+var minifyCSS = require('gulp-minify-css');
 
 gulp.task('lint', function () {
     return gulp.src(['./lib/**/*.js', '!./lib/**/xtpl/**/*.js'])
@@ -85,7 +86,12 @@ gulp.task('less', function () {
     var less = require('gulp-less');
     gulp.src('lib/date-picker/assets/dpl.less').pipe(less({
         paths: [path.join(__dirname, 'lib/date-picker/assets/')]
-    })).pipe(gulp.dest('lib/date-picker/assets/'));
+    }))
+        .pipe(rename('dpl-debug.css'))
+        .pipe(gulp.dest('lib/date-picker/assets/'))
+        .pipe(rename('dpl.css'))
+        .pipe(minifyCSS({keepBreaks: true}))
+        .pipe(gulp.dest('lib/date-picker/assets/'));
 });
 
 gulp.task('auto-d', function () {
