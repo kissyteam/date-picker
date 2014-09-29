@@ -33,7 +33,188 @@ date-picker/xtpl/popup-render
 date-picker/xtpl/popup
 */
 var date_picker_xtpl_decades, date_picker_xtpl_decades_render, date_picker_xtpl_years, date_picker_xtpl_year_panel, date_picker_xtpl_months, date_picker_xtpl_month_panel, date_picker_xtpl_picker, date_picker_xtpl_popup, date_picker_xtpl_decade_panel, date_picker_xtpl_years_render, date_picker_xtpl_year_panel_render, date_picker_xtpl_months_render, date_picker_xtpl_month_panel_render, date_picker_xtpl_picker_render, date_picker_xtpl_popup_render, date_picker_xtpl_decade_panel_render, date_picker_decade_panel, date_picker_year_panel, date_picker_month_panel, date_picker;
-date_picker_xtpl_decades = undefined;
+date_picker_xtpl_decades = function (exports) {
+  var ret = exports = function decades(undefined) {
+    var t;
+    var t0;
+    var t1;
+    var t2;
+    var t3;
+    var t4;
+    var t5;
+    var t6;
+    var t7;
+    var t8;
+    var t9;
+    var tpl = this;
+    var root = tpl.root;
+    var buffer = tpl.buffer;
+    var scope = tpl.scope;
+    var runtime = tpl.runtime;
+    var name = tpl.name;
+    var pos = tpl.pos;
+    var data = scope.data;
+    var affix = scope.affix;
+    var nativeCommands = root.nativeCommands;
+    var utils = root.utils;
+    var callFnUtil = utils['callFn'];
+    var callCommandUtil = utils['callCommand'];
+    var rangeCommand = nativeCommands['range'];
+    var foreachCommand = nativeCommands['foreach'];
+    var forinCommand = nativeCommands['forin'];
+    var eachCommand = nativeCommands['each'];
+    var withCommand = nativeCommands['with'];
+    var ifCommand = nativeCommands['if'];
+    var setCommand = nativeCommands['set'];
+    var includeCommand = nativeCommands['include'];
+    var parseCommand = nativeCommands['parse'];
+    var extendCommand = nativeCommands['extend'];
+    var blockCommand = nativeCommands['block'];
+    var macroCommand = nativeCommands['macro'];
+    var debuggerCommand = nativeCommands['debugger'];
+    function func3(scope, buffer, undefined) {
+      var data = scope.data;
+      var affix = scope.affix;
+      buffer.data += '\n         ';
+      pos.line = 7;
+      var callRet4;
+      callRet4 = callFnUtil(tpl, scope, {
+        escape: 1,
+        params: ['selected-cell']
+      }, buffer, ['getBaseCssClasses']);
+      buffer = buffer.writeEscaped(callRet4);
+      buffer.data += '\n        ';
+      return buffer;
+    }
+    function func12(scope, buffer, undefined) {
+      var data = scope.data;
+      var affix = scope.affix;
+      buffer.data += '\n         ';
+      pos.line = 10;
+      var callRet13;
+      callRet13 = callFnUtil(tpl, scope, {
+        escape: 1,
+        params: ['last-century-cell']
+      }, buffer, ['getBaseCssClasses']);
+      buffer = buffer.writeEscaped(callRet13);
+      buffer.data += '\n        ';
+      return buffer;
+    }
+    function func17(scope, buffer, undefined) {
+      var data = scope.data;
+      var affix = scope.affix;
+      buffer.data += '\n         ';
+      pos.line = 13;
+      var callRet18;
+      callRet18 = callFnUtil(tpl, scope, {
+        escape: 1,
+        params: ['next-century-cell']
+      }, buffer, ['getBaseCssClasses']);
+      buffer = buffer.writeEscaped(callRet18);
+      buffer.data += '\n        ';
+      return buffer;
+    }
+    function func1(scope, buffer, undefined) {
+      var data = scope.data;
+      var affix = scope.affix;
+      buffer.data += '\n    <td role="gridcell"\n        class="';
+      pos.line = 5;
+      var callRet2;
+      callRet2 = callFnUtil(tpl, scope, {
+        escape: 1,
+        params: ['cell']
+      }, buffer, ['getBaseCssClasses']);
+      buffer = buffer.writeEscaped(callRet2);
+      buffer.data += '\n        ';
+      pos.line = 6;
+      pos.line = 6;
+      var id5 = (t = affix.startDecade) !== undefined ? t : (t = data.startDecade) !== undefined ? t : scope.resolveLooseUp(['startDecade']);
+      var exp7 = id5;
+      var id6 = (t = affix.year) !== undefined ? t : (t = data.year) !== undefined ? t : scope.resolveLooseUp(['year']);
+      exp7 = id5 <= id6;
+      var exp11 = exp7;
+      if (exp11) {
+        var id8 = (t = affix.year) !== undefined ? t : (t = data.year) !== undefined ? t : scope.resolveLooseUp(['year']);
+        var exp10 = id8;
+        var id9 = (t = affix.endDecade) !== undefined ? t : (t = data.endDecade) !== undefined ? t : scope.resolveLooseUp(['endDecade']);
+        exp10 = id8 <= id9;
+        exp11 = exp10;
+      }
+      buffer = ifCommand.call(tpl, scope, {
+        params: [exp11],
+        fn: func3
+      }, buffer);
+      buffer.data += '\n        ';
+      pos.line = 9;
+      pos.line = 9;
+      var id14 = (t = affix.startDecade) !== undefined ? t : (t = data.startDecade) !== undefined ? t : scope.resolveLooseUp(['startDecade']);
+      var exp16 = id14;
+      var id15 = (t = affix.startYear) !== undefined ? t : (t = data.startYear) !== undefined ? t : scope.resolveLooseUp(['startYear']);
+      exp16 = id14 < id15;
+      buffer = ifCommand.call(tpl, scope, {
+        params: [exp16],
+        fn: func12
+      }, buffer);
+      buffer.data += '\n        ';
+      pos.line = 12;
+      pos.line = 12;
+      var id19 = (t = affix.endDecade) !== undefined ? t : (t = data.endDecade) !== undefined ? t : scope.resolveLooseUp(['endDecade']);
+      var exp21 = id19;
+      var id20 = (t = affix.endYear) !== undefined ? t : (t = data.endYear) !== undefined ? t : scope.resolveLooseUp(['endYear']);
+      exp21 = id19 > id20;
+      buffer = ifCommand.call(tpl, scope, {
+        params: [exp21],
+        fn: func17
+      }, buffer);
+      buffer.data += '\n        ">\n        <a hidefocus="on"\n           href="javascript:void(0)"\n           unselectable="on"\n           class="';
+      pos.line = 19;
+      var callRet22;
+      callRet22 = callFnUtil(tpl, scope, {
+        escape: 1,
+        params: ['decade']
+      }, buffer, ['getBaseCssClasses']);
+      buffer = buffer.writeEscaped(callRet22);
+      buffer.data += '">\n            ';
+      pos.line = 20;
+      var id23 = (t = affix.startDecade) !== undefined ? t : (t = data.startDecade) !== undefined ? t : scope.resolveLooseUp(['startDecade']);
+      buffer = buffer.writeEscaped(id23);
+      buffer.data += '-';
+      var id24 = (t = affix.endDecade) !== undefined ? t : (t = data.endDecade) !== undefined ? t : scope.resolveLooseUp(['endDecade']);
+      buffer = buffer.writeEscaped(id24);
+      buffer.data += '\n        </a>\n    </td>\n    ';
+      return buffer;
+    }
+    function func0(scope, buffer, undefined) {
+      var data = scope.data;
+      var affix = scope.affix;
+      buffer.data += '\n<tr role="row">\n    ';
+      pos.line = 3;
+      pos.line = 3;
+      var id26 = (t = affix.xindex) !== undefined ? t : (t = data.xindex) !== undefined ? t : scope.resolveLooseUp(['xindex']);
+      var id25 = (t = affix.decades) !== undefined ? affix.decades[id26] : (t = data.decades) !== undefined ? t[id26] : scope.resolveLooseUp([
+        'decades',
+        id26
+      ]);
+      buffer = eachCommand.call(tpl, scope, {
+        params: [id25],
+        fn: func1
+      }, buffer);
+      buffer.data += '\n</tr>\n';
+      return buffer;
+    }
+    buffer.data += '';
+    pos.line = 1;
+    pos.line = 1;
+    var id27 = (t = affix.decades) !== undefined ? t : (t = data.decades) !== undefined ? t : scope.resolveLooseUp(['decades']);
+    buffer = eachCommand.call(tpl, scope, {
+      params: [id27],
+      fn: func0
+    }, buffer);
+    return buffer;
+  };
+  ret.TPL_NAME = module.id || module.name;
+  return exports;
+}();
 date_picker_xtpl_decades_render = function (exports) {
   var tpl = date_picker_xtpl_decades;
   var XTemplateRuntime = xtemplate_runtime;
@@ -1015,7 +1196,7 @@ date_picker_xtpl_decade_panel = function (exports) {
       params: ['header']
     }, buffer, ['getBaseCssClasses']);
     buffer = buffer.writeEscaped(callRet0);
-    buffer.data += '">\r\n    <a class="';
+    buffer.data += '">\n    <a class="';
     pos.line = 2;
     var callRet1;
     callRet1 = callFnUtil(tpl, scope, {
@@ -1023,11 +1204,11 @@ date_picker_xtpl_decade_panel = function (exports) {
       params: ['prev-century-btn']
     }, buffer, ['getBaseCssClasses']);
     buffer = buffer.writeEscaped(callRet1);
-    buffer.data += '"\r\n       href="javascript:void(0)"\r\n       role="button"\r\n       title="';
+    buffer.data += '"\n       href="javascript:void(0)"\n       role="button"\n       title="';
     pos.line = 5;
     var id2 = (t = affix.previousCenturyLabel) !== undefined ? t : (t = data.previousCenturyLabel) !== undefined ? t : scope.resolveLooseUp(['previousCenturyLabel']);
     buffer = buffer.writeEscaped(id2);
-    buffer.data += '"\r\n       hidefocus="on">\r\n    </a>\r\n    <div class="';
+    buffer.data += '"\n       hidefocus="on">\n    </a>\n    <div class="';
     pos.line = 8;
     var callRet3;
     callRet3 = callFnUtil(tpl, scope, {
@@ -1035,14 +1216,14 @@ date_picker_xtpl_decade_panel = function (exports) {
       params: ['century']
     }, buffer, ['getBaseCssClasses']);
     buffer = buffer.writeEscaped(callRet3);
-    buffer.data += '">\r\n                ';
+    buffer.data += '">\n                ';
     pos.line = 9;
     var id4 = (t = affix.startYear) !== undefined ? t : (t = data.startYear) !== undefined ? t : scope.resolveLooseUp(['startYear']);
     buffer = buffer.writeEscaped(id4);
     buffer.data += '-';
     var id5 = (t = affix.endYear) !== undefined ? t : (t = data.endYear) !== undefined ? t : scope.resolveLooseUp(['endYear']);
     buffer = buffer.writeEscaped(id5);
-    buffer.data += '\r\n    </div>\r\n    <a class="';
+    buffer.data += '\n    </div>\n    <a class="';
     pos.line = 11;
     var callRet6;
     callRet6 = callFnUtil(tpl, scope, {
@@ -1050,11 +1231,11 @@ date_picker_xtpl_decade_panel = function (exports) {
       params: ['next-century-btn']
     }, buffer, ['getBaseCssClasses']);
     buffer = buffer.writeEscaped(callRet6);
-    buffer.data += '"\r\n       href="javascript:void(0)"\r\n       role="button"\r\n       title="';
+    buffer.data += '"\n       href="javascript:void(0)"\n       role="button"\n       title="';
     pos.line = 14;
     var id7 = (t = affix.nextCenturyLabel) !== undefined ? t : (t = data.nextCenturyLabel) !== undefined ? t : scope.resolveLooseUp(['nextCenturyLabel']);
     buffer = buffer.writeEscaped(id7);
-    buffer.data += '"\r\n       hidefocus="on">\r\n    </a>\r\n</div>\r\n<div class="';
+    buffer.data += '"\n       hidefocus="on">\n    </a>\n</div>\n<div class="';
     pos.line = 18;
     var callRet8;
     callRet8 = callFnUtil(tpl, scope, {
@@ -1062,7 +1243,7 @@ date_picker_xtpl_decade_panel = function (exports) {
       params: ['body']
     }, buffer, ['getBaseCssClasses']);
     buffer = buffer.writeEscaped(callRet8);
-    buffer.data += '">\r\n    <table class="';
+    buffer.data += '">\n    <table class="';
     pos.line = 19;
     var callRet9;
     callRet9 = callFnUtil(tpl, scope, {
@@ -1070,7 +1251,7 @@ date_picker_xtpl_decade_panel = function (exports) {
       params: ['table']
     }, buffer, ['getBaseCssClasses']);
     buffer = buffer.writeEscaped(callRet9);
-    buffer.data += '" cellspacing="0" role="grid">\r\n        <tbody class="';
+    buffer.data += '" cellspacing="0" role="grid">\n        <tbody class="';
     pos.line = 20;
     var callRet10;
     callRet10 = callFnUtil(tpl, scope, {
@@ -1078,12 +1259,12 @@ date_picker_xtpl_decade_panel = function (exports) {
       params: ['tbody']
     }, buffer, ['getBaseCssClasses']);
     buffer = buffer.writeEscaped(callRet10);
-    buffer.data += '">\r\n        ';
+    buffer.data += '">\n        ';
     pos.line = 21;
     var callRet11;
     buffer = root.includeModule(scope, { params: [date_picker_xtpl_decades] }, buffer, tpl);
     buffer = buffer.write(callRet11);
-    buffer.data += '\r\n        </tbody>\r\n    </table>\r\n</div>';
+    buffer.data += '\n        </tbody>\n    </table>\n</div>';
     return buffer;
   };
   ret.TPL_NAME = module.id || module.name;
