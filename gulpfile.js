@@ -31,7 +31,9 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build', ['lint', 'less', 'xtpl'], function () {
-    gulp.src('./lib/**/*.css').pipe(gulp.dest('build'));
+    var CombinedStream = require('combined-stream');
+    var combinedStream = CombinedStream.create();
+    combinedStream.append(gulp.src('./lib/**/*.css').pipe(gulp.dest('build')));
     ['date-picker', 'date-picker/i18n/zh-cn', 'date-picker/i18n/en-us'].forEach(function (tag) {
         var packages = {};
         packages[tag] = {
@@ -39,16 +41,13 @@ gulp.task('build', ['lint', 'less', 'xtpl'], function () {
         };
         var basename = path.basename(tag);
         var dirname = path.dirname(tag);
-        gulp.src('./lib/' + tag + '.js')
+        combinedStream.append(gulp.src('./lib/' + tag + '.js')
             .pipe(modulex({
                 modulex: {
                     packages: packages
                 }
             }))
             .pipe(kclean({
-                options: {
-                    prefixMode: 'standard'
-                },
                 files: [
                     {
                         src: './lib/' + tag + '-debug.js',
@@ -62,8 +61,9 @@ gulp.task('build', ['lint', 'less', 'xtpl'], function () {
             .pipe(replace(/@DEBUG@/g, ''))
             .pipe(uglify())
             .pipe(rename(basename + '.js'))
-            .pipe(gulp.dest(path.resolve(build, dirname)));
+            .pipe(gulp.dest(path.resolve(build, dirname))));
     });
+    return combinedStream;
 });
 
 gulp.task('mx', function () {
@@ -74,7 +74,7 @@ gulp.task('mx', function () {
 gulp.task('xtpl', function () {
     var gulpXTemplate = require('gulp-xtemplate');
     var XTemplate = require('xtemplate');
-    gulp.src('lib/**/*.xtpl').pipe(gulpXTemplate({
+    return gulp.src('lib/**/*.xtpl').pipe(gulpXTemplate({
         wrap: false,
         runtime: 'xtemplate/runtime',
         suffix: '.xtpl',
@@ -84,7 +84,7 @@ gulp.task('xtpl', function () {
 
 gulp.task('less', function () {
     var less = require('gulp-less');
-    gulp.src('lib/date-picker/assets/dpl.less').pipe(less({
+    return gulp.src('lib/date-picker/assets/dpl.less').pipe(less({
         paths: [path.join(__dirname, 'lib/date-picker/assets/')]
     }))
         .pipe(rename('dpl-debug.css'))
