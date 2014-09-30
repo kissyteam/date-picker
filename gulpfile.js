@@ -30,10 +30,12 @@ gulp.task('clean', function () {
     }).pipe(clean());
 });
 
-gulp.task('build', ['lint', 'less', 'xtpl'], function () {
-    var CombinedStream = require('combined-stream');
-    var combinedStream = CombinedStream.create();
-    combinedStream.append(gulp.src('./lib/**/*.css').pipe(gulp.dest('build')));
+gulp.task('build', ['lint', 'less', 'xtpl'], function (done) {
+    var async = require('async');
+    var tasks = [];
+    tasks.push(function (done) {
+        gulp.src('./lib/**/*.css').pipe(gulp.dest('build')).on('end', done);
+    });
     ['date-picker', 'date-picker/i18n/zh-cn', 'date-picker/i18n/en-us'].forEach(function (tag) {
         var packages = {};
         packages[tag] = {
@@ -41,29 +43,31 @@ gulp.task('build', ['lint', 'less', 'xtpl'], function () {
         };
         var basename = path.basename(tag);
         var dirname = path.dirname(tag);
-        combinedStream.append(gulp.src('./lib/' + tag + '.js')
-            .pipe(modulex({
-                modulex: {
-                    packages: packages
-                }
-            }))
-            .pipe(kclean({
-                files: [
-                    {
-                        src: './lib/' + tag + '-debug.js',
-                        outputModule: tag
+        tasks.push(function (done) {
+            gulp.src('./lib/' + tag + '.js')
+                .pipe(modulex({
+                    modulex: {
+                        packages: packages
                     }
-                ]
-            }))
-            .pipe(replace(/@VERSION@/g, packageInfo.version))
-            .pipe(gulp.dest(path.resolve(build, dirname)))
-            .pipe(filter(basename + '-debug.js'))
-            .pipe(replace(/@DEBUG@/g, ''))
-            .pipe(uglify())
-            .pipe(rename(basename + '.js'))
-            .pipe(gulp.dest(path.resolve(build, dirname))));
+                }))
+                .pipe(kclean({
+                    files: [
+                        {
+                            src: './lib/' + tag + '-debug.js',
+                            outputModule: tag
+                        }
+                    ]
+                }))
+                .pipe(replace(/@VERSION@/g, packageInfo.version))
+                .pipe(gulp.dest(path.resolve(build, dirname)))
+                .pipe(filter(basename + '-debug.js'))
+                .pipe(replace(/@DEBUG@/g, ''))
+                .pipe(uglify())
+                .pipe(rename(basename + '.js'))
+                .pipe(gulp.dest(path.resolve(build, dirname))).on('end', done);
+        });
     });
-    return combinedStream;
+    async.parallel(tasks, done);
 });
 
 gulp.task('mx', function () {
