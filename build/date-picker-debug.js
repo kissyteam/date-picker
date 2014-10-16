@@ -1,3 +1,8 @@
+/*
+Copyright 2014, modulex-date-picker@1.0.0
+MIT Licensed
+build time: Thu, 16 Oct 2014 07:12:17 GMT
+*/
 modulex.add("date-picker", ["xtemplate/runtime","util","event-dom/gesture/tap","node","component/control","gregorian-calendar-format","gregorian-calendar","i18n!date-picker","component/extension/shim","component/extension/align"], function(require, exports, module) {
 var xtemplateRuntime = require("xtemplate/runtime");
 var _util_ = require("util");
@@ -2196,6 +2201,7 @@ datePicker = function (exports) {
       }
     }
   });
+  DatePicker.version = '1.0.0';
   var PopupPickerTpl = datePickerXtplPopupRender, Shim = componentExtensionShim, AlignExtension = componentExtensionAlign;
   DatePicker.Popup = DatePicker.extend([
     Shim,

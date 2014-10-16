@@ -14,12 +14,12 @@
         "!index.js"
     ],
     "dependencies": {
-        "modulex": "modulex#master",
-        "modulex-feature": "modulex-feature#master",
-        "modulex-ua": "modulex-ua#master",
-        "modulex-node": "modulex-node#master",
-        "modulex-component": "modulex-component#master",
-        "xtemplate": "xtemplate#3.2.2",
-        "gregorian-calendar-format": "gregorian-calendar-format#master"
+        "modulex": "*",
+        "modulex-feature": "modulex-feature#1.x",
+        "modulex-ua": "modulex-ua#1.x",
+        "modulex-node": "modulex-node#1.x",
+        "modulex-component": "modulex-component#1.x",
+        "xtemplate": "xtemplate#3.x",
+        "gregorian-calendar-format": "gregorian-calendar-format#1.x"
     }
 }

@@ -1,6 +1,6 @@
 {
   "name": "modulex-date-picker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "yiminghe <yiminghe@gmail.com>",
   "engines": {
     "node": "~0.11"
@@ -56,7 +56,8 @@
     "node-jscover-coveralls": "^1.0.10",
     "node-jscover-handler": "^1.0.3",
     "precommit-hook": "^1.0.7",
-    "xtemplate": "3.2.2"
+    "gulp-wrapper": "^0.1.5",
+    "xtemplate": "3.x"
   },
   "precommit": [
     "lint"
@@ -64,6 +65,7 @@
   "scripts": {
     "start": "node --harmony server",
     "test": "",
+    "publish": "gulp tag",
     "lint": "gulp lint",
     "browser-test": "mocha-phantomjs http://localhost:8030/tests/browser/runner.html",
     "browser-test-build": "mocha-phantomjs http://localhost:8030/tests/browser/runner.html?build",
