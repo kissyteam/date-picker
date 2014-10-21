@@ -1,7 +1,7 @@
 /*
-Copyright 2014, modulex-date-picker@1.0.0
+Copyright 2014, modulex-date-picker@1.0.2
 MIT Licensed
-build time: Thu, 16 Oct 2014 07:12:17 GMT
+build time: Tue, 21 Oct 2014 07:14:53 GMT
 */
 modulex.add("date-picker/i18n/zh-cn", [], function(require, exports, module) {
 

@@ -1,7 +1,7 @@
 /*
-Copyright 2014, modulex-date-picker@1.0.0
+Copyright 2014, modulex-date-picker@1.0.2
 MIT Licensed
-build time: Thu, 16 Oct 2014 07:12:17 GMT
+build time: Tue, 21 Oct 2014 07:14:53 GMT
 */
 modulex.add("date-picker", ["xtemplate/runtime","util","event-dom/gesture/tap","node","component/control","gregorian-calendar-format","gregorian-calendar","i18n!date-picker","component/extension/shim","component/extension/align"], function(require, exports, module) {
 var xtemplateRuntime = require("xtemplate/runtime");
@@ -1908,8 +1908,13 @@ datePicker = function (exports) {
       self.get('previousYearBtn').on(tap, previousYear, self);
       self.get('tbodyEl').delegate(tap, '.' + self.getBaseCssClass('cell'), chooseCell, self);
       self.get('monthSelectEl').on(tap, showMonthPanel, self);
-      self.get('todayBtnEl').on(tap, chooseToday, self);
-      self.get('clearBtnEl').on(tap, onClearClick, self);
+      var todayBtnEl = self.get('todayBtnEl');
+      if (todayBtnEl) {
+        todayBtnEl.on(tap, chooseToday, self);
+      }
+      if (self.get('clearBtnEl')) {
+        self.get('clearBtnEl').on(tap, onClearClick, self);
+      }
     },
     getMonthYearLabel: function () {
       var self = this;
@@ -2036,9 +2041,11 @@ datePicker = function (exports) {
       } else {
         var tbodyEl = self.get('tbodyEl');
         var monthSelectContentEl = self.get('monthSelectContentEl');
-        var todayBtnEl = self.get('todayBtnEl');
         monthSelectContentEl.html(self.getMonthYearLabel());
-        todayBtnEl.attr('title', self.getTodayTimeLabel());
+        var todayBtnEl = self.get('todayBtnEl');
+        if (todayBtnEl) {
+          todayBtnEl.attr('title', self.getTodayTimeLabel());
+        }
         tbodyEl.html(self.renderDates());
       }
       self.$el.attr('aria-activedescendant', getIdFromDate(value));
@@ -2201,7 +2208,7 @@ datePicker = function (exports) {
       }
     }
   });
-  DatePicker.version = '1.0.0';
+  DatePicker.version = '1.0.2';
   var PopupPickerTpl = datePickerXtplPopupRender, Shim = componentExtensionShim, AlignExtension = componentExtensionAlign;
   DatePicker.Popup = DatePicker.extend([
     Shim,

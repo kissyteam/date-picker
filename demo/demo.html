@@ -13,15 +13,19 @@
     <script src="/mx_modules/feature-debug.js"></script>
     <script src="/mx_modules/meta.js"></script>
     <script>
-        modulex.config({
-            base: '/mx_modules',
-            packages: {
-                'date-picker': {
-                    filter:'debug',
-                    base: '/build/date-picker'
+        (function () {
+            var build = location.href.indexOf('?build') !== -1;
+            modulex.config({
+                base: '/mx_modules',
+                packages: {
+                    'date-picker': {
+                        filter: build ? 'debug' : '',
+                        base: '/' + (build ? 'build' : 'lib') + '/date-picker'
+                    }
                 }
-            }
-        });
+            });
+        })();
+
     </script>
     <style>
         a:focus {
@@ -48,8 +52,9 @@
             disabledDate: function (current, value) {
                 return current.getMonth() < value.getMonth();
             },
-            // showWeekNumber:false,
-            // showToday:false,
+            showWeekNumber: false,
+            showClear: false,
+            showToday: false,
             render: '#holder'
         }).render();
 
