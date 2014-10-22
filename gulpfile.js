@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var filter = require('gulp-filter');
 var kclean = require('gulp-kclean');
-var modulex = require('gulp-modulex');
 var path = require('path');
 var rename = require('gulp-rename');
 var packageInfo = require('./package.json');
