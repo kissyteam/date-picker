@@ -47,9 +47,6 @@ var header = ['/*',
 gulp.task('build', ['lint', 'less', 'xtpl'], function (done) {
     var async = require('async');
     var tasks = [];
-    tasks.push(function (done) {
-        gulp.src('./lib/**/*.css').pipe(gulp.dest('build')).on('end', done);
-    });
     ['date-picker', 'date-picker/i18n/zh-cn', 'date-picker/i18n/en-us'].forEach(function (tag) {
         var packages = {};
         packages[tag] = {
@@ -106,13 +103,13 @@ gulp.task('xtpl', function () {
 gulp.task('less', function () {
     var less = require('gulp-less');
     return gulp.src('lib/date-picker/assets/dpl.less').pipe(less({
-        paths: [path.join(__dirname, 'lib/date-picker/assets/')]
+        paths: [path.join(__dirname, 'bower_components')]
     }))
         .pipe(rename('dpl-debug.css'))
-        .pipe(gulp.dest('lib/date-picker/assets/'))
+        .pipe(gulp.dest('build/date-picker/assets/'))
         .pipe(rename('dpl.css'))
         .pipe(minifyCSS({keepBreaks: true}))
-        .pipe(gulp.dest('lib/date-picker/assets/'));
+        .pipe(gulp.dest('build/date-picker/assets/'));
 });
 
 gulp.task('auto-d', function () {

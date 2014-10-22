@@ -1,7 +1,7 @@
 /*
 Copyright 2014, modulex-date-picker@1.0.2
 MIT Licensed
-build time: Tue, 21 Oct 2014 07:14:53 GMT
+build time: Wed, 22 Oct 2014 07:09:05 GMT
 */
 modulex.add("date-picker", ["xtemplate/runtime","util","event-dom/gesture/tap","node","component/control","gregorian-calendar-format","gregorian-calendar","i18n!date-picker","component/extension/shim","component/extension/align"], function(require, exports, module) {
 var xtemplateRuntime = require("xtemplate/runtime");
